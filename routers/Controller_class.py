@@ -201,7 +201,9 @@ class Controller:
                     "type_book" : book.book_type,
                     "intro" : book.intro,
                     "rating" : book.review.rating,
-                    "price" : book.price
+                    "price" : book.price,
+                    "rating" : book.review.rating,
+                    "promotion" : book.get_promotion_info()
                 }
             return format
         return 'Not Found'

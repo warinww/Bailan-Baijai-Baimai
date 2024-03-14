@@ -90,3 +90,8 @@ class Book:
             start = None
             end = None
             self.__book_status = BookStatus(start, end, type)
+            
+    def get_promotion_info(self):
+        if self.__promotion is not None:
+            return f"{self.__promotion.name_festival} festival give you {self.__promotion.discount}% discount for {self.__promotion.period} days"
+        else: return None

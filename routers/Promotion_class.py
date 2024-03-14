@@ -8,7 +8,7 @@ class Promotion:
         self.__book_list = []
         self.__start_date_time = datetime.datetime.now()
         self.__end_date_time = self.__start_date_time + datetime.timedelta(days=period)
-
+        
     @property
     def name_festival(self):
         return self.__name_festival
@@ -16,6 +16,10 @@ class Promotion:
     @property
     def discount(self):
         return self.__discount
+    
+    @property
+    def period(self):
+        return self.__period
 
     @property
     def book_list(self):

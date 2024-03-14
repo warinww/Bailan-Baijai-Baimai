@@ -63,7 +63,6 @@ book5 = Book("Food Book", "Non-fiction", 500, "intro", "Content")
 book6 = Book("Animal Book", "Non-fiction", 600, "intro", "Content")
 
 promotion1 = Promotion("Valentine", 10, 7)
-# promotion2 = Promotion("new year", 15, 7)
 
 chanels = [
     PaymentMethod("bank",1),
@@ -312,3 +311,5 @@ async def create_upload_file(file: UploadFile = File(...)):
         f.write(file.file.read())
 
     return {"filename": file_path}
+
+print(controller.show_book_info(2))
