@@ -129,7 +129,6 @@ async function rent() {
     }
 }
 
-
 async function buy() {
     if (selectedBooks.length == 0){
         Swal.fire({
@@ -178,10 +177,6 @@ function check_collection(accountType) {
   
     // Check if there is a saved account ID
     if (account_id) {
-        // Display the account ID on the page
-        // document.getElementById('result').innerHTML = "Account ID: " + account_id;
-  
-        // Periodically update coin information using the retrieved account ID
         setInterval(function () {
             loadCoinInfo(account_id);
         }, 350); // Update every 5 seconds (adjust as needed)
