@@ -194,19 +194,20 @@ class Controller:
 
     def show_book_info(self, book_id):
         book = self.search_book_by_id(book_id)
-        if book is not None:
-            format = {
-                    "book_name" : book.name,
-                    "writer_name" : book.writer.account_name,
-                    "type_book" : book.book_type,
-                    "intro" : book.intro,
-                    "rating" : book.review.rating,
-                    "price" : book.price,
-                    "rating" : book.review.rating,
-                    "promotion" : book.get_promotion_info()
-                }
-            return format
-        return 'Not Found'
+        if book is None:
+            return 'Not found book'
+        format = {
+                "book_name" : book.name,
+                "writer_name" : book.writer.account_name,
+                "type_book" : book.book_type,
+                "intro" : book.intro,
+                "rating" : book.review.rating,
+                "price" : book.price,
+                "rating" : book.review.rating,
+                "promotion" : book.get_promotion_info()
+            }
+        return format
+        
             
     def show_book_collection_of_writer(self,writer_name):
         book_collection = []
@@ -387,13 +388,13 @@ class Controller:
         for book_id in book_id_list:
             book = self.search_book_by_id(book_id)
             if book is None:
-                return f"Book with ID {book_id} not found"
+                return f"Book not found"
             
             if book in account.book_collection_list:
-                return f"You already have {book.name}"
+                return f"You already have book"
             
             if account.coin < book.price:
-                return f"Not enough coins to rent {book.name}"
+                return f"Not enough coins"
             
             account.lost_coin(book.price)
             account.update_book_collection_list(book)
@@ -414,14 +415,14 @@ class Controller:
         for book_id in book_id_list:
             book = self.search_book_by_id(book_id)
             if book is None:
-                return f"Book with ID {book_id} not found"
+                return f"Book not found"
             
             if book in account.book_collection_list:
-                return f"You already have {book.name}"
+                return f"You already have book"
             
             new_book_price = book.price * 0.8
             if account.coin < new_book_price:
-                return f"Not enough coins to rent {book.name}"
+                return f"Not enough coins"
             
             account.lost_coin(new_book_price)
             account.update_book_collection_list(book)

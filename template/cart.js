@@ -107,15 +107,24 @@ async function rent() {
         const response = await axios.post(`http://127.0.0.1:8000/rent_book?reader_id=${accountId}`, {
             book_id: selectedBooks
         });
-        console.log(response.data.rent);
-        Swal.fire({
-            icon: "success",
-            title: "Book in collection",
-            showConfirmButton: false,
-            timer: 1500
-        });
-        for (const book of selectedBooks) {
-            removeFromCart(book);
+        if (response.data.Rent == "Success"){
+            Swal.fire({
+                icon: "success",
+                title: "Book in collection",
+                showConfirmButton: false,
+                timer: 1500
+            });
+            for (const book of selectedBooks) {
+                removeFromCart(book);
+            }
+        } else {
+            console.log(response.data.Rent)
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Something went wrong!",
+                footer: '<a href="#" style="text-align: center;">Why do I have this issue?</a>'
+            });
         }
     } catch (error) {
         Swal.fire({
@@ -149,8 +158,24 @@ async function buy() {
             showConfirmButton: false,
             timer: 1500
         });
-        for (const book of selectedBooks) {
-            removeFromCart(book);
+        if (response.data.Buy == "Success"){
+            Swal.fire({
+                icon: "success",
+                title: "Book in collection",
+                showConfirmButton: false,
+                timer: 1500
+            });
+            for (const book of selectedBooks) {
+                removeFromCart(book);
+            }
+        } else {
+            console.log(response.data.Buy)
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Something went wrong!",
+                footer: '<a href="#" style="text-align: center;">Why do I have this issue?</a>'
+            });
         }
     } catch (error) {
         Swal.fire({
