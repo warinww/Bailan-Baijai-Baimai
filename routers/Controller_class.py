@@ -416,11 +416,11 @@ class Controller:
                 
             if account.coin >= sum_price:
                 account.lost_coin(sum_price)
-                book.update_book_status("Rent")
-                book.add_num_of_reader(1)
                 account.update_book_collection_list(book)
                 date_time = datetime.datetime.now()
                 account.update_coin_transaction_history_list(sum_price, date_time, "rent")
+                book.update_book_status("Rent")
+                book.add_num_of_reader(1)
                 book.writer.add_coin(new_book_price)
                 return "Success"
             return "Don't have coin enough"
