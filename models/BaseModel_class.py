@@ -13,7 +13,6 @@ class BookIdList(BaseModel):
     
 class Uploadbook(BaseModel):
     name: str
-    # writer: str 
     book_type: str
     price_coin: int
     intro: str

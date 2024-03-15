@@ -1,5 +1,4 @@
 from typing import List
-from fastapi import FastAPI, HTTPException
 from fastapi import FastAPI, HTTPException ,File, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
@@ -109,12 +108,9 @@ controller.add_rating(6, 5)
 controller.add_rating(6, 3)
 
 controller.promotion = promotion1
-
 # ------------------------------------------
 reader1.update_book_collection_list(book1)
-
 controller.top_up(1, 500, 1)
-
 writer1.add_coin(2000)
 reader1.add_coin(2000)  
 # ------------------------------------------
@@ -144,11 +140,14 @@ async def Show_Book_Collection_of_Reader(Reader_id:int) -> dict:
 async def show_book_when_upload_book(writer_name: str) -> dict:
     return {"Book's list" : controller.show_book_collection_of_writer(writer_name)}
 
-# Search
+
+# Coin
 @app.get("/get_coin", tags=['Coin'])
 async def get_coin(id:int) -> dict:
     return {"coin": controller.get_coin(id)}
 
+
+# Search
 @app.get("/search_book_by_name", tags = ["Search"])
 async def search_book_by_bookname(name:str) -> dict:
     return {"book_list" : controller.search_book_by_bookname(name)}
@@ -190,15 +189,15 @@ async def rent_book(reader_id: int, data: BookIdList):
     return {"Rent": controller.rent_book(reader_id, data.book_id)}
 
 
-# Coin Transaction History
-@app.get("/show_coin_transaction",tags=["Coin Transaction"])
+#History
+@app.get("/show_coin_transaction",tags=["History"])
 async def show_coin_transaction(ID:int) -> dict:
     return{"Coin Transaction's List" : controller.show_cointrasaction_history(ID)}
 
-# Payment History
 @app.get("/show_payment_history", tags=["History"])
 async def show_payment_history(ID : int) -> dict:
     return{"Payment History's List" : controller.show_payment_history(ID)}
+
 
 # Money
 @app.get("/channels",tags=["Money"])
@@ -233,6 +232,7 @@ async def view_comment(Book_id : int) -> dict:
 async def show_promotion() -> dict:
     return {"Promotion": controller.promotion.name_festival}
 
+
 #Complain
 @app.post("/submit_complaint", tags = ["Complain"])
 async def submit_complaint(user_id: int, message: str):
@@ -242,7 +242,6 @@ async def submit_complaint(user_id: int, message: str):
 async def view_complaints():
     return {"Complain": controller.view_complaints()}
 
-from fastapi import HTTPException
 
 # Register/Login
 @app.post("/register_reader", tags = [ "Register/Login"])
@@ -293,11 +292,11 @@ async def view_writer_list():
         writers.append(format)
     return {"writers": writers}
 
+# Upload book
 upload_folder_path = r"C:\Users\User\Documents\KMITL\1D\OOP\web\Bailan-Baijai-main\template\images"
 
 @app.post("/uploadfile/", tags=["Upload Image"])
 async def create_upload_file(file: UploadFile = File(...)):
-    # Save the content of the uploaded file to a new file
     file_path = os.path.join(upload_folder_path, file.filename)
     
     with open(file_path, "wb") as f:
