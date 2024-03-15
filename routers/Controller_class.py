@@ -340,20 +340,20 @@ class Controller:
 
 # Money
     def show_payment_method(self):
-        chanels = []
+        channels = []
         for c in self.__payment_method_list:
              format = {
-                 "id":c.chanel_id,
-                "name":c.chanel_name
+                 "id":c.channel_id,
+                "name":c.channel_name
              }
-             chanels.append(format)
-        return chanels
+             channels.append(format)
+        return channels
 
-    def top_up(self, id_account, money, chanel):
+    def top_up(self, id_account, money, channel):
         account = self.search_reader_by_id(id_account)
         if account is not None:  
             for c in self.__payment_method_list:
-                if c.chanel_id == chanel:
+                if c.channel_id == channel:
                     if money % 2 == 0:
                         coin = money/2
                         date_time = datetime.datetime.now()
@@ -362,7 +362,7 @@ class Controller:
                         account.update_coin_transaction_history_list(coin,date_time,"top up")
                         return "Success"
                     else : return "Please increse/decrese money 1 Baht"
-            return "Not Found Chanel"
+            return "Not Found Channel"
         return "Don't Have any Account"
     def exchange(self, writer_id, coin):
         account = self.search_writer_by_id(writer_id)

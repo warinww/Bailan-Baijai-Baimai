@@ -1,22 +1,16 @@
-from typing import Optional
-from typing import Union
 from typing import List
 from fastapi import FastAPI, HTTPException
-from fastapi import FastAPI, HTTPException , File, UploadFile
+from fastapi import FastAPI, HTTPException ,File, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 import os
-
 
 # routers class
 from routers.Controller_class import Controller
 from routers.Account_class import Reader, Writer
 from routers.Book_class import Book
-from routers.Review_class import Review
 from routers.Promotion_class import Promotion
-from routers.Complain_class import Complain
 from routers.PaymentMethod_class import PaymentMethod
-
 
 # models
 from models.BaseModel_class import User, coinInput, BookIdList, Uploadbook
@@ -140,7 +134,6 @@ async def upload_book(writer_id : int , book_detail : Uploadbook) -> dict:
     writer = controller.search_writer_by_id(writer_id)
     if writer is not None:
         book = Book(book_detail.name,book_detail.book_type,book_detail.price_coin,book_detail.intro,book_detail.content)
-        # controller.upload_book(book,writer)
         return {"status" : controller.upload_book(book,writer)}
     
 @app.get("/show_book_collection_of_reader", tags=["Book"])
@@ -311,5 +304,3 @@ async def create_upload_file(file: UploadFile = File(...)):
         f.write(file.file.read())
 
     return {"filename": file_path}
-
-print(controller.show_book_info(2))
