@@ -22,8 +22,13 @@ async function upload(event) {
             "content": content
         });
         console.log("Response:", response);
-        
-        alert(response.data.status);
+        document.getElementById('response').innerText = `Success`;
+        Swal.fire({
+            icon: "success",
+            title: "Success",
+            showConfirmButton: false,
+            timer: 9000
+          });
     } catch (error) {
         console.error("Error:", error);
     }
@@ -32,7 +37,8 @@ async function upload(event) {
 async function uploadFile() {
     const fileInput = document.getElementById('fileInput');
     const file = fileInput.files[0];
-    
+
+    // Check if a file is selected
     if (!file) {
         Swal.fire({
             icon: "error",
@@ -57,7 +63,7 @@ async function uploadFile() {
             icon: "success",
             title: "Success",
             showConfirmButton: false,
-            timer: 1500
+            timer: 9000
           });
     } catch (error) {
         console.error('Error uploading file:', error);
