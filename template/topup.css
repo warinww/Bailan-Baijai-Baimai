@@ -1,7 +1,4 @@
 .payment-container{
-    /* background-color: #ff774a;
-    width: 280px;
-    color: #fff; */
     position: relative;
     left: 600px;
     border-radius: 10px;
@@ -21,7 +18,7 @@
     margin-left: 110px;
 }
 
-.chanels-content{
+.channels-content{
     text-align: center;
     margin-top: 15px;
 }

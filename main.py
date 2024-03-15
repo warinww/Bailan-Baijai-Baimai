@@ -58,12 +58,12 @@ book6 = Book("Animal Book", "Non-fiction", 600, "intro", "Content")
 
 promotion1 = Promotion("Valentine", 10, 7)
 
-chanels = [
+channels = [
     PaymentMethod("bank",1),
     PaymentMethod("credit card",2)
     ]
 
-for c in chanels:
+for c in channels:
     controller.add_payment_method(c)
 
 controller.top_up(7,500,1)
@@ -201,13 +201,13 @@ async def show_payment_history(ID : int) -> dict:
     return{"Payment History's List" : controller.show_payment_history(ID)}
 
 # Money
-@app.get("/chanels",tags=["Money"])
+@app.get("/channels",tags=["Money"])
 async def show_payment_method()->dict:
-    return {"chanels":controller.show_payment_method()}
+    return {"channels":controller.show_payment_method()}
 
 @app.post("/top_up", tags=['Money'])
-async def top_up(account_id : int, money : coinInput, chanel_id:int):
-    return {"status":controller.top_up(account_id, money.coin,chanel_id)}
+async def top_up(account_id : int, money : coinInput, channel_id:int):
+    return {"status":controller.top_up(account_id, money.coin,channel_id)}
 
 @app.post("/transfer", tags=['Money'])
 async def transfer_coin_to_money(writer_id:int, data: coinInput):

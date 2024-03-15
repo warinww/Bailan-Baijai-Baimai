@@ -1,4 +1,3 @@
-// Check if the register form exists on the current page
 const registerForm = document.getElementById('registerForm');
 
 if (registerForm) {
@@ -7,7 +6,6 @@ if (registerForm) {
         const username = document.getElementById('username').value;
         const password = document.getElementById('password').value;
 
-        // Get the selected role
         const role = document.querySelector('input[name="role"]:checked').value;
 
         try {
@@ -24,8 +22,7 @@ if (registerForm) {
                 timer: 1500
             });
 
-            // Redirect to login page or handle success
-            window.location.href = 'login.html'; // Redirect to the login page after successful registration
+            window.location.href = 'login.html';
         } catch (error) {
             Swal.fire({
                 icon: "error",
@@ -58,7 +55,6 @@ if (loginForm) {
             const account_id = response.data.account_id;
             localStorage.setItem('account_id', account_id);
             localStorage.setItem('username', username )
-            // Redirect to dashboard or handle success
             window.location.href = 'index.html';
         } catch (error) {
             Swal.fire({

@@ -1,19 +1,19 @@
-async function get_chanels() {
-    const response = await axios.get(`http://127.0.0.1:8000/chanels`);
+async function get_channels() {
+    const response = await axios.get(`http://127.0.0.1:8000/channels`);
     console.log(response.data);
-    const chanel = response.data['chanels'];
-    displayChanels(chanel);
-    console.log(chanel)
+    const channel = response.data['channels'];
+    displaychannels(channel);
+    console.log(channel)
   }
   
-  function displayChanels(channels) {
-    const payment_chanel = document.getElementById('chanels');
-    payment_chanel.innerHTML = ``;
+  function displaychannels(channels) {
+    const payment_channel = document.getElementById('channels');
+    payment_channel.innerHTML = ``;
   
-    channels.forEach(chanel => {
+    channels.forEach(channel => {
       const div = document.createElement('div');
-      div.innerHTML = `<p>${chanel.id} ${chanel.name}</p>`;
-      payment_chanel.appendChild(div);
+      div.innerHTML = `<p>${channel.id} ${channel.name}</p>`;
+      payment_channel.appendChild(div);
     });
   }
   

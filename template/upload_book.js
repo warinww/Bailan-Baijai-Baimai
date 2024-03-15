@@ -32,8 +32,7 @@ async function upload(event) {
 async function uploadFile() {
     const fileInput = document.getElementById('fileInput');
     const file = fileInput.files[0];
-
-    // Check if a file is selected
+    
     if (!file) {
         Swal.fire({
             icon: "error",

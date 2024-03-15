@@ -20,7 +20,6 @@
                 </a>
                 <div class="btn btn-outline-light me-2 custom-btn" id="result"></div>
                 <a href="topup.html" class="btn btn-outline-light me-1">Top Up</a>
-                <!-- <a href="index.html" class="btn btn-outline-light me-1">Home Page</a> -->
                 <a onclick="check_collection('reader')" class="btn btn-outline-light me-1">Book's Collection</a>
                 <a href="history.html" class="btn btn-outline-light me-1">History</a>
 
@@ -72,30 +71,17 @@
             console.log(localStorage.getItem('username'));
             get_all_book();
         
-            // // Check if the user is a writer
-            // if (accountType === 'writer') {
-            //     // Change the text of the "Top Up" button to "Transfer"
-            //     const topUpButton = document.querySelector('a[href="topup.html"]');
-            //     if (topUpButton) {
-            //         topUpButton.innerText = 'Transfer';
-            //         // Change the href attribute to "transfer.html" or any appropriate URL
-            //         topUpButton.setAttribute('href', 'transfer.html');
-            //     }
-            // }
             if (accountType === 'writer') {
-                // Change the text of the "Top Up" button to "Transfer"
                 const topUpButton = document.querySelector('a[href="topup.html"]');
                 if (topUpButton) {
-                topUpButton.innerText = 'Transfer';
-                // Change the href attribute to "transfer.html" or any appropriate URL
-                topUpButton.setAttribute('href', 'transfer.html');
+                topUpButton.innerText = 'Exchange';
+                topUpButton.setAttribute('href', 'exchange.html');
 
-                // Add an "Upload" button next to the "Transfer" button
                 const uploadButton = document.createElement('a');
-                uploadButton.className = 'btn btn-outline-light me-2'; // Set the appropriate class names
-                uploadButton.setAttribute('type', 'button'); // Set the appropriate type attribute
+                uploadButton.className = 'btn btn-outline-light me-2';
+                uploadButton.setAttribute('type', 'button');
                 uploadButton.innerText = 'Upload Book';
-                uploadButton.setAttribute('href', 'upload_book.html'); // Set the appropriate URL for the upload page
+                uploadButton.setAttribute('href', 'upload_book.html');
                 topUpButton.parentNode.insertBefore(uploadButton, topUpButton.nextSibling);
                 }
             }

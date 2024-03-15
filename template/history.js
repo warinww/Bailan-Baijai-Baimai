@@ -5,7 +5,6 @@ async function get_coin_transaction(account_id) {
         displayCoinTransac(coinTransacList);
     } catch (error) {
         console.error("Error fetching coin transaction history:", error);
-        // Handle the error, display a message, or redirect the user as needed.
     }
 }
 
@@ -19,7 +18,6 @@ function displayCoinTransac(coinTransacList) {
         });
     } else {
         console.error("No or invalid coin transaction history found.");
-        // Handle the case where no valid transaction history is available, e.g., display a message or redirect the user.
     }
 }
 
@@ -30,7 +28,6 @@ async function get_payment_transaction(account_id) {
         displayPaymentTransac(paymentTransacList);
     } catch (error) {
         console.error("Error fetching coin transaction history:", error);
-        // Handle the error, display a message, or redirect the user as needed.
     }
 }
 
@@ -44,6 +41,5 @@ function displayPaymentTransac(paymentTransacList) {
         });
     } else {
         console.error("No or invalid coin transaction history found.");
-        // Handle the case where no valid transaction history is available, e.g., display a message or redirect the user.
     }
 }

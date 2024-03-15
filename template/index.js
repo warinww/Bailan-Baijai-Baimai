@@ -409,7 +409,6 @@ function displayComplain(complainList) {
 async function writer_book_collection(queryParams) {
   const writer = queryParams.get('writer');
   const heading = document.querySelector('h1.text-center.py-4');
-  // console.log(writer);
   if (writer) {
       const response = await axios.get(
           `http://127.0.0.1:8000/show_book_collection_of_writer?writer_name=${writer}`
@@ -458,23 +457,16 @@ function check_collection(accountType) {
 
 document.addEventListener('DOMContentLoaded', function () {
 
-  // Check if there is a saved account ID
   if (account_id) {
-      // Display the account ID on the page
-      // document.getElementById('result').innerHTML = "Account ID: " + account_id;
-
-      // Periodically update coin information using the retrieved account ID
       setInterval(function () {
           loadCoinInfo(account_id);
-      }, 350); // Update every 5 seconds (adjust as needed)
+      }, 350);
   } else {
-      // Handle the case where there is no saved account ID
       console.log("No account ID found in localStorage.");
   }
 });
 
 function loadCoinInfo(account_id) {
-  // Make an AJAX request to fetch coin information using the account ID
   var xhr = new XMLHttpRequest();
 
   xhr.onreadystatechange = function () {
@@ -484,7 +476,6 @@ function loadCoinInfo(account_id) {
       }
   };
 
-  // Adjust the URL to match your FastAPI route
   xhr.open("GET", "http://127.0.0.1:8000/get_coin?id=" + account_id, true);
   xhr.send();
 }

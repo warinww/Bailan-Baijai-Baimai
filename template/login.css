@@ -4,9 +4,9 @@ input[type="radio"] + label {
 }
 
 input[type="radio"]:checked + label::before {
-    background-color: #000; /* เปลี่ยนสีของขอบเป็นสีดำ */
+    background-color: #000;
 }
     
 input[type="radio"] + label::before {
-    background-color: #333; /* เปลี่ยนสีของขอบเป็นสีเทาเข้ม */
+    background-color: #333;
 }

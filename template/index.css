@@ -27,14 +27,10 @@
 .bookInfoContainer {
     display: flex;
     flex-direction: row;
-    /* เปลี่ยนเป็นแนวตั้ง */
     align-items: center;
-    /* จัดให้เนื้อหาอยู่ตรงกลางตามแนวนอน */
     justify-content: center;
-    /* จัดให้เนื้อหาอยู่ตรงกลางตามแนวตั้ง */
     padding: 20px;
     height: 100vh;
-    /* ทำให้เนื้อหาอยู่ตรงกลางของหน้าจอทั้งความสูง */
     margin-top: -100px;
 }
 
@@ -53,13 +49,10 @@
 
 #bookCover {
     width: 320px;
-    /* กำหนดขนาดสูงสุดของรูปภาพ */
 }
 #complainList{
     max-width: 600px;
-    /* Set the maximum width of the comment list */
     margin: 0 auto;
-    /* Center the comment list horizontally */
     text-align: center;
     
 }
@@ -69,9 +62,7 @@
 
 #commentList {
     max-width: 600px;
-    /* Set the maximum width of the comment list */
     margin: 0 auto;
-    /* Center the comment list horizontally */
     padding: 20px;
     border: 1px solid #ddd;
     border-radius: 8px;
@@ -149,6 +140,6 @@ a {
 
 .custom-btn {
     background-color: yellow;
-    color: #212529; /* Text color (adjust as needed) */
-    border-color: yellow; /* Border color */
+    color: #212529;
+    border-color: yellow;
 }

@@ -54,8 +54,6 @@ async function removeFromCart(bookId) {
     try {
         await axios.delete(`http://127.0.0.1:8000/remove_book?reader_id=${accountId}&book_id=${bookId}`);
         console.log('Book removed successfully');
-
-        // After successful removal, refresh the cart items
         showCartItems();
         
     } catch (error) {
@@ -175,19 +173,16 @@ function check_collection(accountType) {
   
   document.addEventListener('DOMContentLoaded', function () {
   
-    // Check if there is a saved account ID
     if (account_id) {
         setInterval(function () {
             loadCoinInfo(account_id);
-        }, 350); // Update every 5 seconds (adjust as needed)
+        }, 350);
     } else {
-        // Handle the case where there is no saved account ID
         console.log("No account ID found in localStorage.");
     }
   });
   
   function loadCoinInfo(account_id) {
-    // Make an AJAX request to fetch coin information using the account ID
     var xhr = new XMLHttpRequest();
   
     xhr.onreadystatechange = function () {
@@ -197,7 +192,6 @@ function check_collection(accountType) {
         }
     };
   
-    // Adjust the URL to match your FastAPI route
     xhr.open("GET", "http://127.0.0.1:8000/search_coin?id=" + account_id, true);
     xhr.send();
   }
