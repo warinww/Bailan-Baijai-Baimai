@@ -401,30 +401,59 @@ class Controller:
             else : return "Don't have coin enough"
         else : return "Not Found Account"
     
+    # def rent_book(self, reader_id, book_id_list):
+    #     account = self.search_reader_by_id(reader_id)
+    #     if account is not None:
+    #         for id in book_id_list:
+    #             book = self.search_book_by_id(id)
+    #             if book is not None:
+    #                 if book in account.book_collection_list:
+    #                     return "You already have "+str(book.name)
+    #                 new_book_price = book.price*0.8
+    #                 success_book = []
+    #                 if account.coin >= new_book_price:
+    #                     account.update_book_collection_list(book)
+    #                     account.lost_coin(new_book_price)
+    #                     date_time = datetime.datetime.now()
+    #                     account.update_coin_transaction_history_list(new_book_price, date_time, "rent")
+    #                     book.add_num_of_reader(1)
+    #                     book.update_book_status("Rent")
+    #                     book.writer.add_coin(new_book_price)
+    #                     success_book.append(book.name)
+    #                 else : return "Success to rent {success_book} but don't have coin enough for other"
+    #             else : return "Not found book"
+    #         return "Success"
+    #     else : return "Not found account"
+    
+
     def rent_book(self, reader_id, book_id_list):
         account = self.search_reader_by_id(reader_id)
-        if account is not None:
-            sum_price = 0
-            for id in book_id_list:
-                book = self.search_book_by_id(id)
-                if book is not None:
-                    if book in account.book_collection_list:
-                        return "You already have "+str(book.name)
-                    new_book_price = book.price*0.8
-                    sum_price += new_book_price
-                else: return "Not found book"
-                
-            if account.coin >= sum_price:
-                account.lost_coin(sum_price)
-                account.update_book_collection_list(book)
-                date_time = datetime.datetime.now()
-                account.update_coin_transaction_history_list(sum_price, date_time, "rent")
-                book.update_book_status("Rent")
-                book.add_num_of_reader(1)
-                book.writer.add_coin(new_book_price)
-                return "Success"
-            return "Don't have coin enough"
-        return "Not found account"
+        if account is None:
+            return "Account not found"
+
+        success_books = []
+        for book_id in book_id_list:
+            book = self.search_book_by_id(book_id)
+            if book is None:
+                return f"Book with ID {book_id} not found"
+            
+            if book in account.book_collection_list:
+                return f"You already have {book.name}"
+            
+            new_book_price = book.price * 0.8
+            if account.coin < new_book_price:
+                return f"Not enough coins to rent {book.name}"
+            
+            account.update_book_collection_list(book)
+            account.lost_coin(new_book_price)
+            date_time = datetime.datetime.now()
+            account.update_coin_transaction_history_list(new_book_price, date_time, "rent")
+            book.add_num_of_reader(1)
+            book.update_book_status("Rent")
+            book.writer.add_coin(new_book_price)
+            success_books.append(book.name)
+
+        return f"Success to rent {', '.join(success_books)}"
     
 # Review
     def add_rating(self, book_id, rating):
