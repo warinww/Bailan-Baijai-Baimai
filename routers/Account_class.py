@@ -46,19 +46,23 @@ class Account:
         
     def add_coin(self, added_coins):
         self.__coin += added_coins
+        return "Done"
         
     def lost_coin(self, lost_coins):
         self.__coin -= lost_coins
+        return "Done"
         
     def update_book_collection_list(self, book):
         self.__book_collection_list.append(book)
+        return "Done"
 
     def update_payment_history_list(self,money,date_time):
-        self.__payment_history_list.append(PaymentHistory(money,date_time))   
+        self.__payment_history_list.append(PaymentHistory(money,date_time))
+        return "Done"
 
     def update_coin_transaction_history_list(self, coin,date_time,type):
         self.__coin_transaction_history_list.append(Coin_transaction(coin,date_time,type))
-
+        return "Done"
 
 class Reader(Account):
     def __init__(self, account_name, password):

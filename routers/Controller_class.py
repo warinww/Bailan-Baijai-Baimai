@@ -77,7 +77,6 @@ class Controller:
                 "id": book.id,
                 "book_name" : book.name,
                 "writer_name" : book.writer.account_name,
-                "type_book" : book.book_type,
                 "rating" : book.review.rating,
                 "price" : book.price
             }
@@ -191,7 +190,8 @@ class Controller:
                 return books
             return "Not found this promotion"
         return "Don't have promotion now"
-            
+    
+
     def show_book_info(self, book_id):
         book = self.search_book_by_id(book_id)
         if book is not None:
@@ -387,13 +387,13 @@ class Controller:
                 book = self.search_book_by_id(id)
                 if book is not None:
                     price += book.price
-                    account.update_book_collection_list(book)
-                    book.writer.add_coin(book.price)
-                    book.update_book_status("Buy")
                 else : return "No Book"
                     
             if account.coin >= price:
                 date_time = datetime.datetime.now()
+                account.update_book_collection_list(book)
+                book.writer.add_coin(book.price)
+                book.update_book_status("Buy")
                 account.update_coin_transaction_history_list(price, date_time, "buy")
                 account.lost_coin(price)
                 book.add_num_of_reader(1)
@@ -410,18 +410,18 @@ class Controller:
                 if book is not None:
                     if book in account.book_collection_list:
                         return "You already have "+str(book.name)
-                    book.update_book_status("Rent")
-                    book.add_num_of_reader(1)
                     new_book_price = book.price*0.8
                     sum_price += new_book_price
-                    account.update_book_collection_list(book)
-                    book.writer.add_coin(new_book_price)
                 else: return "Not found book"
                 
             if account.coin >= sum_price:
                 account.lost_coin(sum_price)
+                book.update_book_status("Rent")
+                book.add_num_of_reader(1)
+                account.update_book_collection_list(book)
                 date_time = datetime.datetime.now()
                 account.update_coin_transaction_history_list(sum_price, date_time, "rent")
+                book.writer.add_coin(new_book_price)
                 return "Success"
             return "Don't have coin enough"
         return "Not found account"

@@ -87,7 +87,7 @@ class Book:
             end = start + datetime.timedelta(days=7)
             self.__book_status = BookStatus(start, end, type)
         elif type == "Buy":
-            start = None
+            start = datetime.datetime.now()
             end = None
             self.__book_status = BookStatus(start, end, type)
             

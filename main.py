@@ -208,9 +208,9 @@ async def show_payment_method()->dict:
 async def top_up(account_id : int, money : coinInput, channel_id:int):
     return {"status":controller.top_up(account_id, money.coin,channel_id)}
 
-@app.post("/transfer", tags=['Money'])
-async def transfer_coin_to_money(writer_id:int, data: coinInput):
-    return {"status": controller.transfer(writer_id, data.coin)}
+@app.post("/exchange", tags=['Money'])
+async def exchange_coin_to_money(writer_id:int, data: coinInput):
+    return {"status": controller.exchange(writer_id, data.coin)}
 
 
 # Review
@@ -267,30 +267,6 @@ async def login(user: User):
         return {"message": "Login successful", "account_id": account_id, "account_type": account_type}
     else:
         raise HTTPException(status_code=401, detail="Invalid username or password")
-
-@app.get("/view_reader_list", tags = [ "Register/Login"])
-async def view_reader_list():
-    readers = []
-    for reader in controller.reader_list:
-        format = {
-            "id": reader.id_account,
-            "username": reader.account_name,
-            "password": reader.password
-        }
-        readers.append(format)
-    return {"readers": readers}
-
-@app.get("/view_writer_list", tags = [ "Register/Login"])
-async def view_writer_list():
-    writers = []
-    for writer in controller.writer_list:
-        format = {
-            "id": writer.id_account,
-            "username": writer.account_name,
-            "password": writer.password
-        }
-        writers.append(format)
-    return {"writers": writers}
 
 # Upload book
 upload_folder_path = r"C:\Users\User\Documents\KMITL\1D\OOP\web\Bailan-Baijai-main\template\images"
